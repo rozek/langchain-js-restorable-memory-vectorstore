@@ -4,7 +4,7 @@ a restorable memory vector store for LangChainJS that works in browsers
 
 ## Overview ##
 
-This simple class adds a `fromJSON` method the `MemoryVectorStore` from [LangChainJS](https://github.com/langchain-ai/langchainjs) in order to be able to preserve and restore any vector store contents while still be browser-compatible (as the typical `save` and `load` methods of vector stores assume to run within a Node.js environment).
+This simple class adds a `fromJSON` method to the `MemoryVectorStore` from [LangChainJS](https://github.com/langchain-ai/langchainjs) in order to be able to preserve and restore any vector store contents while still be browser-compatible (as the typical `save` and `load` methods of vector stores assume to run within a Node.js environment).
 
 If you replace your `MemoryVectorStore` with a `RestorableMemoryVectorStore`, you can now use the original `toJSON` to serialize your vector store into a JSON object (which may then be persisted using a browser's IndexedDB or similar) and later restore it using `fromJSON`.
 
@@ -20,6 +20,44 @@ Or you may dynamically import it using an `import` expression
 
 ```javascript
 const { RestorableMemoryVectorStore } = await import "https://rozek.github.io/langchain-js-restorable-memory-vectorstore/dist/RestorableMemoryVectorStore.js"
+```
+
+## Usage ##
+
+Assuming that you have installed the module, the `RestorableMemoryVectorStore` can be used as follows
+
+### In Node.js or Browser Environments ###
+
+```typescript
+  import { RestorableMemoryVectorStore } from 'langchain-js-restorable-memory-vectorstore'
+  import { OpenAIEmbeddings } from '@langchain/openai'
+  
+/**** create a vector store with documents ****/
+
+  const Embedder = new OpenAIEmbeddings()
+  const Store    = new RestorableMemoryVectorStore(Embedder)
+  
+/**** add some documents ****/
+
+  await Store.addDocuments([
+    { pageContent: 'Hello world', metadata: { source:'greeting' } },
+    { pageContent: 'Bye world',   metadata: { source:'farewell' } },
+  ])
+  
+/**** serialize the vector store to JSON ****/
+
+  const Serialization = JSON.stringify(Store) // invokes "toJSON"
+    
+/**** later, restore the vector store ****/
+
+  const restoredStore = await RestorableMemoryVectorStore.fromJSON(
+    Serialization, Embedder
+  )
+      
+/**** the restored store is now ready to be used ****/
+
+  const results = await restoredStore.similaritySearch('hello', 1)
+  console.log(results)
 ```
 
 
