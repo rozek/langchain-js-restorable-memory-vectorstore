@@ -36,6 +36,16 @@ Just install [NPM](https://docs.npmjs.com/) according to the instructions for yo
 
 You may also look into the author's [build-configuration-study](https://github.com/rozek/build-configuration-study) for a general description of his build environment.
 
+## Test Instructions ##
+
+`langchain-js-restorable-memory-vectorstore` comes with a few tests. Just use
+
+```bash
+npm run test
+```
+
+to run them and get a report on the console.
+
 ## License ##
 
 [MIT License](LICENSE.md)
