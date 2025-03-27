@@ -26,7 +26,7 @@ const { RestorableMemoryVectorStore } = await import "https://rozek.github.io/la
 
 Assuming that you have installed the module, the `RestorableMemoryVectorStore` can be used as follows
 
-### In Node.js or Browser Environments ###
+### Usage in Node.js or Browser Environments ###
 
 ```typescript
   import { RestorableMemoryVectorStore } from 'langchain-js-restorable-memory-vectorstore'
@@ -60,7 +60,43 @@ Assuming that you have installed the module, the `RestorableMemoryVectorStore` c
   console.log(Results)
 ```
 
-### In Svelte ###
+### Usage within Svelte ###
+
+For Svelte, it is recommended to import the package in a module context:
+
+```html
+<script context="module">
+  import { RestorableMemoryVectorStore } from 'langchain-js-restorable-memory-vectorstore'
+  import { OpenAIEmbeddings } from '@langchain/openai'
+</script>
+
+<script>
+  const Embedder = new OpenAIEmbeddings()
+  const Store    = new RestorableMemoryVectorStore(Embedder)
+  
+/**** add some documents ****/
+
+  await Store.addDocuments([
+    { pageContent: 'Hello world', metadata: { source:'greeting' } },
+    { pageContent: 'Bye world',   metadata: { source:'farewell' } },
+  ])
+  
+/**** serialize the vector store to JSON ****/
+
+  const Serialization = JSON.stringify(Store) // invokes "toJSON"
+    
+/**** later, restore the vector store ****/
+
+  const restoredStore = await RestorableMemoryVectorStore.fromJSON(
+    Serialization, Embedder
+  )
+      
+/**** the restored store is now ready to be used ****/
+
+  const Results = await restoredStore.similaritySearch('hello', 1)
+  console.log(Results)
+</script>
+```
 
 
 ## API Reference
