@@ -56,10 +56,42 @@ Assuming that you have installed the module, the `RestorableMemoryVectorStore` c
       
 /**** the restored store is now ready to be used ****/
 
-  const results = await restoredStore.similaritySearch('hello', 1)
-  console.log(results)
+  const Results = await restoredStore.similaritySearch('hello', 1)
+  console.log(Results)
 ```
 
+### In Svelte ###
+
+
+## API Reference
+
+### `RestorableMemoryVectorStore`
+
+extends `MemoryVectorStore` with a `fromJSON` method
+
+#### Constructor
+
+```typescript
+new RestorableMemoryVectorStore(Embedder:EmbeddingsInterface)
+```
+
+- `Embedder`: An implementation of the LangChain `EmbeddingsInterface` to use for creating embeddings
+
+#### Static Methods
+
+##### `fromJSON`
+
+```typescript
+static async fromJSON(
+  JSONString:string, Embedder:EmbeddingsInterface
+): Promise<RestorableMemoryVectorStore>
+```
+
+restores a vector store from a serialized JSON string.
+
+- `JSONString`: the serialized vector store in JSON format.
+- `Embedder`:   an implementation of the LangChain `EmbeddingsInterface` to use for creating embeddings
+- returns: a new `RestorableMemoryVectorStore` instance populated with the serialized data
 
 ## Build Instructions ##
 
