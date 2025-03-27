@@ -2,10 +2,29 @@
   "name": "langchain-js-restorable-memory-vectorstore",
   "version": "0.0.1",
   "description": "a restorable memory vector store for LangChainJS that works in browsers",
+  "keywords": [
+    "langchain",
+    "vectorstore",
+    "AI",
+    "LLM",
+    "RAG",
+    "memory"
+  ],
+  "author": "Andreas Rozek <a.rozek@gmx.de> (https://www.rozek.de/)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rozek/langchain-js-restorable-memory-vectorstore.git"
+  },
+  "homepage": "https://github.com/rozek/langchain-js-restorable-memory-vectorstore#readme",
+  "bugs": {
+    "url": "https://github.com/rozek/langchain-js-restorable-memory-vectorstore/issues"
+  },
+
+  "type": "module",
   "main": "dist/RestorableMemoryVectorStore.js",
   "module": "dist/RestorableMemoryVectorStore.js",
   "types": "dist/RestorableMemoryVectorStore.d.ts",
-  "type": "module",
   "files": [
     "dist"
   ],
@@ -15,16 +34,6 @@
     "test": "vitest run",
     "test:watch": "vitest"
   },
-  "keywords": [
-    "langchain",
-    "vectorstore",
-    "AI",
-    "LLM",
-    "RAG",
-    "memory"
-  ],
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "@langchain/core": "^0.3.43",
     "langchain": "^0.3.19",
