@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { externalizeDeps } from 'vite-plugin-externalize-deps';
+
 
 export default defineConfig({
   build: {
@@ -12,9 +14,8 @@ export default defineConfig({
       formats: ['es'],
     },
     rollupOptions: {
-      external: ['@langchain/core', 'langchain'], // keep dependencies external
       output: {
-        inlineDynamicImports: true, // inline all dynamic imports
+        inlineDynamicImports: false, // inline all dynamic imports
         preserveModules: false, // don't preserve module structure
       },
       treeshake: {
@@ -40,6 +41,10 @@ export default defineConfig({
       insertTypesEntry: true,
       skipDiagnostics: false,
       logDiagnostics: true,
+    }),
+    externalizeDeps({
+      deps: true,
+      devDeps: true,
     }),
     nodePolyfills({ // enable all polyfills for maximum compatibility
       protocolImports: true,
@@ -102,10 +107,6 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    include: [
-      '@langchain/core',
-      'langchain'
-    ],
     esbuildOptions: {
       target: 'esnext', // modern browser target
       define: {
