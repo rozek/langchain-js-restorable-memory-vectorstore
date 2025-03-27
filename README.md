@@ -22,11 +22,9 @@ Or you may dynamically import it using an `import` expression
 const { RestorableMemoryVectorStore } = await import "https://rozek.github.io/langchain-js-restorable-memory-vectorstore/dist/RestorableMemoryVectorStore.js"
 ```
 
-## Usage ##
+## Usage in Node.js or Browser Environments ##
 
 Assuming that you have installed the module, the `RestorableMemoryVectorStore` can be used as follows
-
-### Usage in Node.js or Browser Environments ###
 
 ```typescript
   import { RestorableMemoryVectorStore } from 'langchain-js-restorable-memory-vectorstore'
@@ -60,7 +58,7 @@ Assuming that you have installed the module, the `RestorableMemoryVectorStore` c
   console.log(Results)
 ```
 
-### Usage within Svelte ###
+## Usage within Svelte ##
 
 For Svelte, it is recommended to import the package in a module context:
 
@@ -97,7 +95,6 @@ For Svelte, it is recommended to import the package in a module context:
   console.log(Results)
 </script>
 ```
-
 
 ## API Reference
 
