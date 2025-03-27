@@ -19,7 +19,7 @@ npm install langchain-js-restorable-memory-vectorstore
 Or you may dynamically import it using an `import` expression
 
 ```javascript
-  const { RestorableMemoryVectorStore } = await import "https://rozek.github.io/langchain-js-restorable-memory-vectorstore/dist/RestorableMemoryVectorStore.js"
+const { RestorableMemoryVectorStore } = await import "https://rozek.github.io/langchain-js-restorable-memory-vectorstore/dist/RestorableMemoryVectorStore.js"
 ```
 
 
